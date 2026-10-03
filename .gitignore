@@ -1,0 +1,10 @@
+qa/
+.sites-runtime/
+.impeccable/
+node_modules/
+*.tar.gz
+.openai/
+.DS_Store
+.env
+.env.*
+dist/index.html
