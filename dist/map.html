@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#153f35">
+  <meta name="description" content="熊野古道中边路41章地图。查看当前位置、附近盖章点，以及厕所、饮水和补给。">
+  <title>熊野古道 · 41章地图</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='3' y='3' width='58' height='58' rx='6' fill='%23b23e32'/%3E%3Cpath d='M15 46V18h10v14h14V18h10v28H15' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./vendor/leaflet.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./guide.css">
+  <script src="./vendor/leaflet.js" defer></script>
+  <script src="./app.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="identity"><span class="seal" aria-hidden="true">熊<br>野</span><div><h1>熊野古道</h1><p>中边路 <span>·</span> 41 章地图</p></div></div>
+    <nav class="primary-nav" aria-label="网站主导航"><a id="guide-link" href="./">徒步攻略</a><a href="./map.html" aria-current="page">地图与定位</a></nav>
+  </header>
+  <main class="workspace">
+    <section class="map-panel" aria-label="熊野古道地图">
+      <div id="map" aria-label="41处盖章点及当前位置，可拖动和缩放"></div>
+      <div class="map-top"><div class="map-context"><span class="map-label">和歌山 · 纪伊半岛</span><label class="route-toggle"><input id="show-routes" type="checkbox" disabled><span class="route-key" aria-hidden="true"></span>官方图路线</label></div><button id="overview" class="map-button" type="button">全线总览</button></div>
+      <div id="map-message" class="map-message" role="status" hidden></div>
+      <div class="map-bottom"><div class="legend"><span><i class="stamp-key"></i>盖章点</span><span><i class="you-key"></i>我的位置</span></div><button id="locate" class="locate" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg><span>定位到我</span></button></div>
+    </section>
+    <aside class="sidebar" aria-label="点位和附近设施">
+      <a id="return-guide" class="map-return" hidden></a>
+      <section class="location-info"><div class="section-line"><h2>走到哪里，看到哪里</h2><span id="gps-state" class="status">未定位</span></div><p id="gps-description" aria-live="polite">开启定位，找到离你最近的一枚章。</p><button id="stop-location" class="text-button" type="button" hidden>停止定位</button></section>
+      <section class="route-guide" aria-label="官方图路线说明"><p class="route-notice">实线为步行路线，蓝灰虚线为舟运参考，橙色虚线段通行待核。通行情况以<a href="https://www.tb-kumano.jp/update/" target="_blank" rel="noopener">官方公告</a>为准。</p><details><summary>按官方图查看路线与分支</summary><p id="route-status" class="hint" role="status">正在载入参考路线…</p><div id="route-list"></div></details></section>
+      <section id="detail" class="detail" aria-label="选中点位详情" hidden></section>
+      <nav class="tabs" aria-label="盖章点列表"><button type="button" id="tab-nearby" aria-pressed="true">附近点位</button><button type="button" id="tab-all" aria-pressed="false">全部 41 章</button><button type="button" id="tab-facilities" aria-pressed="false">沿途设施</button></nav>
+      <section class="points-section"><div class="list-heading"><h2 id="list-title">从第一枚章开始</h2><span id="list-count">41 处</span></div><p id="list-hint" class="hint">定位后按距离排序；也可以先在地图上选点。</p><div id="points" class="points" aria-live="polite"><p class="hint">正在载入盖章点…</p></div></section>
+      <section class="amenities" hidden><div class="section-line"><h2>沿途所需</h2><span class="source-label">和歌山县公开资料</span></div><div class="filters" aria-label="设施类型"><button type="button" data-kind="toilets" aria-pressed="true">厕所</button><button type="button" data-kind="water" aria-pressed="true">饮水</button><button type="button" data-kind="supplies" aria-pressed="true">补给</button></div><button id="load-amenities" class="secondary" type="button" disabled>查看地图中心 3 km 内设施</button><p id="amenity-status" class="hint" role="status">正在载入设施资料…</p><div id="amenity-list"></div></section>
+      <details class="data-notes"><summary>数据来源与使用说明</summary><div><p>41 章编号采用和歌山县官方押印地图，与「双朝圣者」盖章要求不同。</p><p>路线核对日期：2026-10-09。编号与分支参照官方押印图，地理线条来自<a href="https://pages.yamap.com/koya_kumano_nakahechi" target="_blank" rel="noopener">和歌山县 × YAMAP 合作课程</a>及 YAMAP 公开路网；保留原始坐标，署名 © YAMAP，遵循<a href="https://yamap.com/terms" target="_blank" rel="noopener">使用条款</a>。熊野川舟运参考线来自新宮市観光協会 2017 年资料。</p><p>已采用2025年10月重开的岩神王子原路，排除停用绕行。线条用于理解路线关系，寺社内部与章箱岔路未全部收录；不是实时导航或当日通行保证。</p><p>资料核对日期：2026-10-03。设施来自 <a href="https://wakayama800.jp/facilities-page/catid5/" target="_blank" rel="noopener">WAKAYAMA800 官方设施目录</a>，并非沿途设施的完整清单。</p><p>部分地点坐标来自 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a>（底库日期 2026-07-24），个别使用公众地图；详见每处来源。</p><p id="coordinate-coverage">坐标为地点参考位置，盖章箱请按现场指示寻找。</p><p>距离均为直线距离，不代表步道里程。首次打开和地图底图需要网络；请结合官方步道地图使用。</p><p>定位仅在当前页面使用，不会储存在本站。地图服务会接收当前浏览区域的瓦片请求。</p><p><a href="https://www.sekaiisan-wakayama.jp/walk/ouinchou.html" target="_blank" rel="noopener">和歌山县世界遗产中心</a> · <a href="https://www.tb-kumano.jp/en/kumano-kodo/" target="_blank" rel="noopener">田边市熊野旅游局步道信息</a></p></div></details>
+    </aside>
+  </main>
+  <noscript>请开启 JavaScript 以查看交互地图和定位。官方押印地图链接仍可直接打开。</noscript>
+</body>
+</html>
