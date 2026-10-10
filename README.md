@@ -15,12 +15,6 @@ npm test
 
 编辑 `guide-data.mjs` 后运行 `npm run build` 生成 `dist/index.html`；正文无须 JavaScript 即可阅读。`npm run dev` 会先构建再启动预览，`npm test` 也会先构建，支持新检出的仓库。编排依据、来源冲突和访问缺口见 [docs/guide-evidence.md](docs/guide-evidence.md)。
 
-## 版本管理
-
-Git 管理源码、地图数据、第三方库及许可证、测试和项目文档。`dist/index.html` 由构建生成；截图、发布压缩包、本机 `.openai/` 发布配置和环境文件不提交。克隆后先运行 `npm run build` 或 `npm run dev`，再使用完整的 `dist/` 预览或发布。
-
-首批四次提交于 2026-10-10 按功能整理，作者和提交者日期按用户要求分别设为 2026-10-03、2026-10-06、2026-10-09、2026-10-10（UTC+08:00）。这些日期用于整理历史，不是对应日期的原始开发快照；资料自身的核对日期以正文为准。
-
 ## 资料与限制
 
 - 清单基准：[和歌山县官方41章地图](https://www.wakayama-kanko.or.jp/lsc/upfile/articleDetail/0000/2510/2510_d003_file.pdf)。JSON 的 `sourceUrl` 指向清单，`coordinateSourceUrl` 指向坐标证据。
