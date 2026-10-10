@@ -43,4 +43,8 @@ Git 管理源码、地图数据、第三方库及许可证、测试和项目文�
 
 ## 发布
 
+GitHub Pages 自动发布配置见 `.github/workflows/pages.yml`：推送到 `main` 或手动运行工作流后，使用 Node.js 24 执行 `npm test`（含构建），校验成功才上传 `dist/` 并部署。项目无 npm 依赖，因此无需 `npm install` 或依赖缓存。
+
+首次启用须在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。个人仓库发布的 Pages 网站可被公众访问，即使源码仓库是私有的；启用前需确认符合访问范围要求。默认项目地址为 `https://ackerr.github.io/kumano/`，只有部署成功后才可用。在 Actions 查看 `Deploy GitHub Pages` 的运行结果；仅在本地 commit 不会触发，必须 push 到 GitHub。
+
 运行 `npm run build` 后，`dist/` 是完整静态输出。现有本机的 Sites 项目身份保存在 `.openai/hosting.json`，该配置不纳入 Git；新检出需要单独配置发布目标。当前交付为本机预览，未确认线上部署成功；手机远程定位必须部署在HTTPS。Leaflet许可证保留于 `dist/vendor/LEAFLET-LICENSE.txt`，OSM来源署名与国土地理院署名保留在页面。
