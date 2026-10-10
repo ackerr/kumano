@@ -1,0 +1,11 @@
+{
+  "name": "kumano-41",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-guide.mjs",
+    "dev": "node build-guide.mjs && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist",
+    "test": "node build-guide.mjs && node check.mjs",
+    "test:browser": "node qa.mjs"
+  }
+}
